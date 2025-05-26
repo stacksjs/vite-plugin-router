@@ -1,4 +1,37 @@
 {
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": ".",
+    "rootDir": ".",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "vite-plugin-routes": ["./src/index.ts"],
+      "vite-plugin-routes/types": ["./src/types.ts"],
+      "vite-plugin-routes/runtime": ["./src/runtime.ts"],
+      "vite-plugin-routes/data-loaders": ["./src/data-loaders/entries/index.ts"]
+    },
+    "resolveJsonModule": true,
+    "types": ["node", "vite/client"],
+    "strict": true,
+    "strictNullChecks": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
   "include": [
     "./src/**/*.ts",
     "./src/*.d.ts",
@@ -13,39 +46,6 @@
     "node_modules",
     "dist"
   ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
-    "jsx": "preserve",
-    "target": "ESNext",
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Bundler",
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "strict": true,
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    "exactOptionalPropertyTypes": false,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": false,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "vite-plugin-routes": ["./src/index.ts"],
-      "vite-plugin-routes/types": ["./src/types.ts"],
-      "vite-plugin-routes/runtime": ["./src/runtime.ts"],
-      "vite-plugin-routes/data-loaders": ["./src/data-loaders/entries/index.ts"]
-    },
-    "types": ["node", "vite/client"]
-  },
   "vueCompilerOptions": {
     "plugins": []
   }

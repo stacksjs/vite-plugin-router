@@ -1,43 +1,41 @@
-import { type ResolvedOptions } from "../options";
+import type { RouteMeta } from 'vue-router'
+import type { ResolvedOptions } from '../options'
+import type { CustomRouteBlock } from './customBlock'
+import type { TreeNodeValue, TreeNodeValueOptions, TreeRouteParam } from './treeNodeValue'
 import {
   createTreeNodeValue,
-  TreeNodeValueOptions,
-  TreeRouteParam,
-} from "./treeNodeValue";
-import type { TreeNodeValue } from "./treeNodeValue";
-import { CustomRouteBlock } from "./customBlock";
-import { RouteMeta } from "vue-router";
+} from './treeNodeValue'
 
 export interface TreeNodeOptions extends ResolvedOptions {
-  treeNodeOptions?: TreeNodeValueOptions;
+  treeNodeOptions?: TreeNodeValueOptions
 }
 
 export class TreeNode {
   /**
    * value of the node
    */
-  value: TreeNodeValue;
+  value: TreeNodeValue
 
   /**
    * children of the node
    */
-  children: Map<string, TreeNode> = new Map();
+  children: Map<string, TreeNode> = new Map()
 
   /**
    * Parent node.
    */
-  parent: TreeNode | undefined;
+  parent: TreeNode | undefined
 
   /**
    * Plugin options taken into account by the tree.
    */
-  options: TreeNodeOptions;
+  options: TreeNodeOptions
 
   // FIXME: refactor this code. It currently helps to keep track if a page has at least one component with `definePage()` but it doesn't tell which. It should keep track of which one while still caching the result per file.
   /**
    * Should this page import the page info
    */
-  hasDefinePage: boolean = false;
+  hasDefinePage: boolean = false
 
   /**
    * Creates a new tree node.
@@ -51,13 +49,13 @@ export class TreeNode {
     pathSegment: string,
     parent?: TreeNode,
   ) {
-    this.options = options;
-    this.parent = parent;
+    this.options = options
+    this.parent = parent
     this.value = createTreeNodeValue(
       pathSegment,
       parent?.value,
       options.treeNodeOptions || options.pathParser,
-    );
+    )
   }
 
   /**
@@ -67,20 +65,21 @@ export class TreeNode {
    * @param filePath - file path, must be a file (not a folder)
    */
   insert(path: string, filePath: string): TreeNode {
-    const { tail, segment, viewName } = splitFilePath(path);
+    const { tail, segment, viewName } = splitFilePath(path)
 
     if (!this.children.has(segment)) {
-      this.children.set(segment, new TreeNode(this.options, segment, this));
+      this.children.set(segment, new TreeNode(this.options, segment, this))
     } // TODO: else error or still override?
-    const child = this.children.get(segment)!;
+    const child = this.children.get(segment)!
 
     // we reached the end of the filePath, therefore it's a component
     if (!tail) {
-      child.value.components.set(viewName, filePath);
-    } else {
-      return child.insert(tail, filePath);
+      child.value.components.set(viewName, filePath)
     }
-    return child;
+    else {
+      return child.insert(tail, filePath)
+    }
+    return child
   }
 
   /**
@@ -92,7 +91,7 @@ export class TreeNode {
    */
   insertParsedPath(path: string, filePath: string = path): TreeNode {
     // TODO: allow null filePath?
-    const isComponent = true;
+    const isComponent = true
 
     const node = new TreeNode(
       {
@@ -100,20 +99,20 @@ export class TreeNode {
         // force the format to raw
         treeNodeOptions: {
           ...this.options.pathParser,
-          format: "path",
+          format: 'path',
         },
       },
       path,
       this,
-    );
-    this.children.set(path, node);
+    )
+    this.children.set(path, node)
 
     if (isComponent) {
       // TODO: allow a way to set the view name
-      node.value.components.set("default", filePath);
+      node.value.components.set('default', filePath)
     }
 
-    return node;
+    return node
   }
 
   /**
@@ -127,13 +126,13 @@ export class TreeNode {
     filePath: string,
     routeBlock: CustomRouteBlock | undefined,
   ) {
-    this.value.setOverride(filePath, routeBlock);
+    this.value.setOverride(filePath, routeBlock)
   }
 
   getSortedChildren() {
     return Array.from(this.children.values()).sort((a, b) =>
       a.path.localeCompare(b.path),
-    );
+    )
   }
 
   /**
@@ -141,11 +140,11 @@ export class TreeNode {
    */
   delete() {
     if (!this.parent) {
-      throw new Error("Cannot delete the root node.");
+      throw new Error('Cannot delete the root node.')
     }
-    this.parent.children.delete(this.value.rawSegment);
+    this.parent.children.delete(this.value.rawSegment)
     // clear link to parent
-    this.parent = undefined;
+    this.parent = undefined
   }
 
   /**
@@ -156,27 +155,28 @@ export class TreeNode {
    */
   remove(path: string) {
     // TODO: rename remove to removeChild
-    const { tail, segment, viewName } = splitFilePath(path);
+    const { tail, segment, viewName } = splitFilePath(path)
 
-    const child = this.children.get(segment);
+    const child = this.children.get(segment)
     if (!child) {
       throw new Error(
         `Cannot Delete "${path}". "${segment}" not found at "${this.path}".`,
-      );
+      )
     }
 
     if (tail) {
-      child.remove(tail);
+      child.remove(tail)
       // if the child doesn't create any route
       if (child.children.size === 0 && child.value.components.size === 0) {
-        this.children.delete(segment);
+        this.children.delete(segment)
       }
-    } else {
+    }
+    else {
       // it can only be component because we only listen for removed files, not folders
-      child.value.components.delete(viewName);
+      child.value.components.delete(viewName)
       // this is the file we wanted to remove
       if (child.children.size === 0 && child.value.components.size === 0) {
-        this.children.delete(segment);
+        this.children.delete(segment)
       }
     }
   }
@@ -186,23 +186,23 @@ export class TreeNode {
    */
   get path() {
     return (
-      this.value.overrides.path ??
-      (this.parent?.isRoot() ? "/" : "") + this.value.pathSegment
-    );
+      this.value.overrides.path
+      ?? (this.parent?.isRoot() ? '/' : '') + this.value.pathSegment
+    )
   }
 
   /**
    * Returns the route path of the node including parent paths.
    */
   get fullPath() {
-    return this.value.fullPath;
+    return this.value.fullPath
   }
 
   /**
    * Returns the route name of the node. If the name was overridden, it returns the override.
    */
   get name() {
-    return this.value.overrides.name || this.options.getRouteName(this);
+    return this.value.overrides.name || this.options.getRouteName(this)
   }
 
   /**
@@ -211,7 +211,7 @@ export class TreeNode {
   get metaAsObject(): Readonly<RouteMeta> {
     return {
       ...this.value.overrides.meta,
-    };
+    }
   }
 
   /**
@@ -219,25 +219,25 @@ export class TreeNode {
    * there is no override, it returns an empty string.
    */
   get meta() {
-    const overrideMeta = this.metaAsObject;
+    const overrideMeta = this.metaAsObject
 
     return Object.keys(overrideMeta).length > 0
       ? JSON.stringify(overrideMeta, null, 2)
-      : "";
+      : ''
   }
 
   get params(): TreeRouteParam[] {
-    const params = this.value.isParam() ? [...this.value.params] : [];
-    let node = this.parent;
+    const params = this.value.isParam() ? [...this.value.params] : []
+    let node = this.parent
     // add all the params from the parents
     while (node) {
       if (node.value.isParam()) {
-        params.unshift(...node.value.params);
+        params.unshift(...node.value.params)
       }
-      node = node.parent;
+      node = node.parent
     }
 
-    return params;
+    return params
   }
 
   /**
@@ -247,20 +247,20 @@ export class TreeNode {
    */
   isRoot() {
     return (
-      !this.parent && this.value.fullPath === "/" && !this.value.components.size
-    );
+      !this.parent && this.value.fullPath === '/' && !this.value.components.size
+    )
   }
 
   toString(): string {
     return `${this.value}${
       // either we have multiple names
-      this.value.components.size > 1 ||
+      this.value.components.size > 1
       // or we have one name and it's not default
-      (this.value.components.size === 1 &&
-        !this.value.components.get("default"))
-        ? ` ⎈(${Array.from(this.value.components.keys()).join(", ")})`
-        : ""
-    }${this.hasDefinePage ? " ⚑ definePage()" : ""}`;
+      || (this.value.components.size === 1
+        && !this.value.components.get('default'))
+        ? ` ⎈(${Array.from(this.value.components.keys()).join(', ')})`
+        : ''
+    }${this.hasDefinePage ? ' ⚑ definePage()' : ''}`
   }
 }
 
@@ -269,17 +269,17 @@ export class TreeNode {
  * sense on the root node.
  */
 export class PrefixTree extends TreeNode {
-  map = new Map<string, TreeNode>();
+  map = new Map<string, TreeNode>()
 
   constructor(options: ResolvedOptions) {
-    super(options, "");
+    super(options, '')
   }
 
   override insert(path: string, filePath: string) {
-    const node = super.insert(path, filePath);
-    this.map.set(filePath, node);
+    const node = super.insert(path, filePath)
+    this.map.set(filePath, node)
 
-    return node;
+    return node
   }
 
   /**
@@ -288,7 +288,7 @@ export class PrefixTree extends TreeNode {
    * @param filePath - file path of the tree node to get
    */
   getChild(filePath: string) {
-    return this.map.get(filePath);
+    return this.map.get(filePath)
   }
 
   /**
@@ -298,8 +298,8 @@ export class PrefixTree extends TreeNode {
    */
   removeChild(filePath: string) {
     if (this.map.has(filePath)) {
-      this.map.get(filePath)!.delete();
-      this.map.delete(filePath);
+      this.map.get(filePath)!.delete()
+      this.map.delete(filePath)
     }
   }
 }
@@ -311,23 +311,23 @@ export class PrefixTree extends TreeNode {
  * @param filePath - filePath to split
  */
 function splitFilePath(filePath: string) {
-  const slashPos = filePath.indexOf("/");
-  let head = slashPos < 0 ? filePath : filePath.slice(0, slashPos);
-  const tail = slashPos < 0 ? "" : filePath.slice(slashPos + 1);
+  const slashPos = filePath.indexOf('/')
+  const head = slashPos < 0 ? filePath : filePath.slice(0, slashPos)
+  const tail = slashPos < 0 ? '' : filePath.slice(slashPos + 1)
 
-  let segment = head;
-  let viewName = "default";
+  let segment = head
+  let viewName = 'default'
 
-  const namedSeparatorPos = segment.indexOf("@");
+  const namedSeparatorPos = segment.indexOf('@')
 
   if (namedSeparatorPos > 0) {
-    viewName = segment.slice(namedSeparatorPos + 1);
-    segment = segment.slice(0, namedSeparatorPos);
+    viewName = segment.slice(namedSeparatorPos + 1)
+    segment = segment.slice(0, namedSeparatorPos)
   }
 
   return {
     segment,
     tail,
     viewName,
-  };
+  }
 }

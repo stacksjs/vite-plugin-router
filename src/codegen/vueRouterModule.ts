@@ -1,7 +1,7 @@
 // NOTE: this code needs to be generated because otherwise it doesn't go through transforms and `vue-router/auto-routes`
 
-import { ts } from "../utils";
-import type { ResolvedOptions } from "../options";
+import type { ResolvedOptions } from '../options'
+import { ts } from '../utils'
 
 // cannot be resolved.
 export function generateVueRouterProxy(
@@ -20,7 +20,7 @@ export {
 } from 'vite-plugin-routes/data-loaders'
 
 export * from 'vite-plugin-routes/data-loaders/basic'
-${addPiniaColada ? "export * from 'vite-plugin-routes/data-loaders/pinia-colada'" : ""}
+${addPiniaColada ? 'export * from \'vite-plugin-routes/data-loaders/pinia-colada\'' : ''}
 
 export function createRouter(options) {
   const { extendRoutes, routes } = options
@@ -35,7 +35,7 @@ export function createRouter(options) {
 
   return router
 }
-`.trimStart();
+`.trimStart()
 }
 
 // FIXME: remove `extendRoutes()` in the next major version

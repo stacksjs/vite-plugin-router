@@ -1,19 +1,19 @@
 // this file had to be moved to avoid tsup from picking it up
-import { describe, expect, it } from "vitest";
-import { resolveOptions } from "../options";
-import { mockWarn } from "../../tests/vitest-mock-warn";
+import { describe, expect, it } from 'vitest'
+import { mockWarn } from '../../tests/vitest-mock-warn'
+import { resolveOptions } from '../options'
 
-describe("options", () => {
-  mockWarn();
-  it("ensure starting dots in extensions", () => {
+describe('options', () => {
+  mockWarn()
+  it('ensure starting dots in extensions', () => {
     expect(
       resolveOptions({
-        extensions: ["vue", ".ts"],
+        extensions: ['vue', '.ts'],
       }),
     ).toMatchObject({
-      extensions: [".vue", ".ts"],
-    });
+      extensions: ['.vue', '.ts'],
+    })
 
-    expect('Invalid extension "vue"').toHaveBeenWarned();
-  });
-});
+    expect('Invalid extension "vue"').toHaveBeenWarned()
+  })
+})

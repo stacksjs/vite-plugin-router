@@ -2,7 +2,7 @@
  * Maybe a promise maybe not
  * @internal
  */
-export type _Awaitable<T> = T | PromiseLike<T>;
+export type _Awaitable<T> = T | PromiseLike<T>
 
 /**
  * Creates a union type that still allows autocompletion for strings.
@@ -10,7 +10,7 @@ export type _Awaitable<T> = T | PromiseLike<T>;
  */
 export type LiteralStringUnion<LiteralType, BaseType extends string = string> =
   | LiteralType
-  | (BaseType & Record<never, never>);
+  | (BaseType & Record<never, never>)
 //
 // for highlighting
-export const ts = String.raw;
+export const ts = String.raw

@@ -7,7 +7,7 @@ import { DataLoaderEntryBase, createDataLoader } from './createDataLoader'
 
 export const defineVueFireLoader = createDataLoader({
   createEntry: (context) => {
-    useCollection(...)
+    useCollection(context.collection)
   },
   before: (context) => {
     // is this the first time?
@@ -35,7 +35,7 @@ const dl = createDataLoader<ExpectedArgs, Options = Base, ContextType = Base>({
     }
 
     // can collect dependencies by passing a proxy as the context
-  )
+  }
 })
 
 dl(...ExpectedArgs, options)
@@ -44,10 +44,9 @@ dl(...ExpectedArgs, options)
 // appollo wants a gql query and then maybe a function to pass variables, etc
 // vue query
 
-
 // version with a whole collection, no dependency, no need to reexucute useCollection ever
 // but the loader could force refresh the data from time to time. Unlikely with Firebase though as they already handle the cache
-defineVueFireLoader('/documents', () => useCollection(...))
+defineVueFireLoader('/documents', () => useCollection('documents'))
 // needs to be reexecuted when the id changes?
 defineVueFireLoader('/documents/[id]', (route) => {
   return useDocument(doc(collections('documents'), route.params.id))
@@ -58,7 +57,6 @@ defineVueFireLoader('/documents/[id]', (route) => {
 })
 // or maybe we could have a way to pass a computed to the loader?
 defineVueFireLoader('/documents/[id]', ((route) => doc(collections('documents'), route.params.id)))
-
 
 // this means createLoader returns a function that:
 
@@ -84,12 +82,11 @@ function _defineVueFireLoader(path: string, docOrCollectionOrQuery: () => unknow
 
 export interface VueFireLoaderEntry<isLazy extends boolean, Data> extends DataLoaderEntryBase<isLazy, Data> {
 
-
 }
 
 // vue query
 
-defineQueryLoader('/documents', () => useQuery(...))
+defineQueryLoader('/documents', () => useQuery('documents'))
 defineQueryLoader('/documents', optionsPassedToUseQuery)
 defineQueryLoader('/documents', to => optionsPassedToUseQuery)
 ```

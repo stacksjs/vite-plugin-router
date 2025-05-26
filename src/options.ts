@@ -1,10 +1,10 @@
-import { isPackageExists as isPackageInstalled } from "local-pkg";
-import { getFileBasedRouteName, isArray, warn } from "./core/utils";
-import type { TreeNode } from "./core/tree";
-import { resolve } from "pathe";
-import { EditableTreeNode } from "./core/extendRoutes";
-import { type ParseSegmentOptions } from "./core/treeNodeValue";
-import { type _Awaitable } from "./utils";
+import type { EditableTreeNode } from './core/extendRoutes'
+import type { TreeNode } from './core/tree'
+import type { ParseSegmentOptions } from './core/treeNodeValue'
+import type { _Awaitable } from './utils'
+import { isPackageExists as isPackageInstalled } from 'local-pkg'
+import { resolve } from 'pathe'
+import { getFileBasedRouteName, isArray, warn } from './core/utils'
 
 /**
  * Options for a routes folder.
@@ -14,7 +14,7 @@ export interface RoutesFolderOption {
    * Folder to scan files that should be used for routes. **Cannot be a glob**, use the `path`, `filePatterns`, and
    * `exclude` options to filter out files. This section will **be removed** from the resulting path.
    */
-  src: string;
+  src: string
 
   /**
    * Prefix to add to the route path **as is**. Defaults to `''`. Can also be a function
@@ -45,19 +45,19 @@ export interface RoutesFolderOption {
    * },
    * ```
    */
-  path?: string | ((filepath: string) => string);
+  path?: string | ((filepath: string) => string)
 
   /**
    * Allows to override the global `filePattern` option for this folder. It can also extend the global values by passing
    * a function that returns an array.
    */
-  filePatterns?: _OverridableOption<string[], string | string[]>;
+  filePatterns?: _OverridableOption<string[], string | string[]>
 
   /**
    * Allows to override the global `exclude` option for this folder. It can
    * also extend the global values by passing a function that returns an array.
    */
-  exclude?: _OverridableOption<string[], string | string[]>;
+  exclude?: _OverridableOption<string[], string | string[]>
 
   /**
    * Allows to override the global `extensions` option for this folder. It can
@@ -66,26 +66,26 @@ export interface RoutesFolderOption {
    * `.page.vue` allows to suffix all pages with `.page.vue` and remove it from
    * the route name.
    */
-  extensions?: _OverridableOption<string[]>;
+  extensions?: _OverridableOption<string[]>
 }
 
 /**
  * Normalized options for a routes folder.
  */
 export interface RoutesFolderOptionResolved extends RoutesFolderOption {
-  path: string | ((filepath: string) => string);
+  path: string | ((filepath: string) => string)
   /**
    * Final glob pattern to match files in the folder.
    */
-  pattern: string[];
-  filePatterns: string[];
-  exclude: string[];
-  extensions: string[];
+  pattern: string[]
+  filePatterns: string[]
+  exclude: string[]
+  extensions: string[]
 }
 
 export type _OverridableOption<T, AllowedTypes = T> =
   | AllowedTypes
-  | ((existing: T) => T);
+  | ((existing: T) => T)
 
 /**
  * Resolves an overridable option by calling the function with the existing value if it's a function, otherwise
@@ -98,13 +98,13 @@ export function resolveOverridableOption<T>(
   defaultValue: T,
   value?: _OverridableOption<T, T>,
 ): T {
-  return typeof value === "function"
+  return typeof value === 'function'
     ? (value as (existing: T) => T)(defaultValue)
-    : (value ?? defaultValue);
+    : (value ?? defaultValue)
 }
 
-export type _RoutesFolder = string | RoutesFolderOption;
-export type RoutesFolder = _RoutesFolder[] | _RoutesFolder;
+export type _RoutesFolder = string | RoutesFolderOption
+export type RoutesFolder = _RoutesFolder[] | _RoutesFolder
 
 /**
  * vite-plugin-routes plugin options.
@@ -115,7 +115,7 @@ export interface Options {
    * bigger part of the filename e.g. `index.page.vue` -> `index` if an extension of `.page.vue` is provided.
    * @default `['.vue']`
    */
-  extensions?: string[];
+  extensions?: string[]
 
   /**
    * Folder(s) to scan for files and generate routes. Can also be an array if you want to add multiple
@@ -124,15 +124,15 @@ export interface Options {
    *
    * @default `"src/pages"`
    */
-  routesFolder?: RoutesFolder;
+  routesFolder?: RoutesFolder
 
   /**
    * Array of `picomatch` globs to ignore. Note the globs are relative to the cwd, so avoid writing
    * something like `['ignored']` to match folders named that way, instead provide a path similar to the `routesFolder`:
-   * `['src/pages/ignored/**']` or use `['**​/ignored']` to match every folder named `ignored`.
+   * `['src/pages/ignored/**']` or use `['**‍/ignored']` to match every folder named `ignored`.
    * @default `[]`
    */
-  exclude?: string[] | string;
+  exclude?: string[] | string
 
   // NOTE: the comment below contains ZWJ characters to allow the sequence `**/*` to be displayed correctly
   /**
@@ -140,13 +140,13 @@ export interface Options {
    * e.g. `**‍/*.{vue,md}` if `extensions` is set to `['.vue', '.md']`. This is relative to the {@link RoutesFolderOption['src']} and
    * @default `['**‍/*']`
    */
-  filePatterns?: string[] | string;
+  filePatterns?: string[] | string
 
   /**
    * Method to generate the name of a route. It's recommended to keep the default value to guarantee a consistent,
    * unique, and predictable naming.
    */
-  getRouteName?: (node: TreeNode) => string;
+  getRouteName?: (node: TreeNode) => string
 
   /**
    * Allows to extend a route by modifying its node, adding children, or even deleting it. This will be invoked once for
@@ -154,55 +154,55 @@ export interface Options {
    *
    * @param route - {@link EditableTreeNode} of the route to extend
    */
-  extendRoute?: (route: EditableTreeNode) => _Awaitable<void>;
+  extendRoute?: (route: EditableTreeNode) => _Awaitable<void>
 
   /**
    * Allows to do some changes before writing the files. This will be invoked **every time** the files need to be written.
    *
    * @param rootRoute - {@link EditableTreeNode} of the root route
    */
-  beforeWriteFiles?: (rootRoute: EditableTreeNode) => _Awaitable<void>;
+  beforeWriteFiles?: (rootRoute: EditableTreeNode) => _Awaitable<void>
 
   /**
    * Defines how page components should be imported. Defaults to dynamic imports to enable lazy loading of pages.
    * @default `'async'`
    */
-  importMode?: "sync" | "async" | ((filepath: string) => "sync" | "async");
+  importMode?: 'sync' | 'async' | ((filepath: string) => 'sync' | 'async')
 
   /**
    * Root of the project. All paths are resolved relatively to this one.
    * @default `process.cwd()`
    */
-  root?: string;
+  root?: string
 
   /**
    * Language for `<route>` blocks in SFC files.
    * @default `'json5'`
    */
-  routeBlockLang?: "yaml" | "yml" | "json5" | "json";
+  routeBlockLang?: 'yaml' | 'yml' | 'json5' | 'json'
 
   /**
    * Should we generate d.ts files or ont. Defaults to `true` if `typescript` is installed. Can be set to a string of
    * the filepath to write the d.ts files to. By default it will generate a file named `typed-router.d.ts`.
    * @default `true`
    */
-  dts?: boolean | string;
+  dts?: boolean | string
 
   /**
    * Allows inspection by vite-plugin-inspect by not adding the leading `\0` to the id of virtual modules.
    * @internal
    */
-  _inspect?: boolean;
+  _inspect?: boolean
 
   /**
    * Activates debug logs.
    */
-  logs?: boolean;
+  logs?: boolean
 
   /**
-   * @inheritDoc ParseSegmentOptions
+   * @inheritDoc
    */
-  pathParser?: ParseSegmentOptions;
+  pathParser?: ParseSegmentOptions
 
   /**
    * Whether to watch the files for changes.
@@ -211,7 +211,7 @@ export interface Options {
    *
    * @default `!process.env.CI`
    */
-  watch?: boolean;
+  watch?: boolean
 
   /**
    * Experimental options. **Warning**: these can change or be removed at any time, even it patch releases. Keep an eye
@@ -224,20 +224,20 @@ export interface Options {
      * the backslash) to automatically re export any imported variable from files in the `src/loaders` folder within a
      * page component.
      */
-    autoExportsDataLoaders?: string | string[];
-  };
+    autoExportsDataLoaders?: string | string[]
+  }
 }
 
 export const DEFAULT_OPTIONS = {
-  extensions: [".vue"],
+  extensions: ['.vue'],
   exclude: [],
-  routesFolder: "src/pages",
-  filePatterns: ["**/*"],
-  routeBlockLang: "json5",
+  routesFolder: 'src/pages',
+  filePatterns: ['**/*'],
+  routeBlockLang: 'json5',
   getRouteName: getFileBasedRouteName,
-  importMode: "async",
+  importMode: 'async',
   root: process.cwd(),
-  dts: isPackageInstalled("typescript"),
+  dts: isPackageInstalled('typescript'),
   logs: false,
   _inspect: false,
   pathParser: {
@@ -245,22 +245,22 @@ export const DEFAULT_OPTIONS = {
   },
   watch: !process.env.CI,
   experimental: {},
-} satisfies Options;
+} satisfies Options
 
 export interface ServerContext {
-  invalidate: (module: string) => void;
-  updateRoutes: () => Promise<void>;
-  reload: () => void;
+  invalidate: (module: string) => void
+  updateRoutes: () => Promise<void>
+  reload: () => void
 }
 
 function normalizeRoutesFolderOption(routesFolder: RoutesFolder) {
   return (isArray(routesFolder) ? routesFolder : [routesFolder]).map(
-    (routeOption) =>
+    routeOption =>
       // normalizing here allows to have a better type for the resolved options
       normalizeRouteOption(
-        typeof routeOption === "string" ? { src: routeOption } : routeOption,
+        typeof routeOption === 'string' ? { src: routeOption } : routeOption,
       ),
-  );
+  )
 }
 
 function normalizeRouteOption(routeOption: RoutesFolderOption) {
@@ -268,7 +268,7 @@ function normalizeRouteOption(routeOption: RoutesFolderOption) {
     ...routeOption,
     // ensure filePatterns is always an array or a function
     filePatterns: routeOption.filePatterns
-      ? typeof routeOption.filePatterns === "function"
+      ? typeof routeOption.filePatterns === 'function'
         ? routeOption.filePatterns
         : isArray(routeOption.filePatterns)
           ? routeOption.filePatterns
@@ -277,13 +277,13 @@ function normalizeRouteOption(routeOption: RoutesFolderOption) {
 
     // same for exclude
     exclude: routeOption.exclude
-      ? typeof routeOption.exclude === "function"
+      ? typeof routeOption.exclude === 'function'
         ? routeOption.exclude
         : isArray(routeOption.exclude)
           ? routeOption.exclude
           : [routeOption.exclude]
       : undefined,
-  };
+  }
 }
 
 /**
@@ -293,24 +293,24 @@ function normalizeRouteOption(routeOption: RoutesFolderOption) {
  * @returns normalized options
  */
 export function resolveOptions(options: Options) {
-  const root = options.root || DEFAULT_OPTIONS.root;
+  const root = options.root || DEFAULT_OPTIONS.root
 
   // normalize the paths with the root
   const routesFolder = normalizeRoutesFolderOption(
     options.routesFolder || DEFAULT_OPTIONS.routesFolder,
-  ).map((routeOption) => ({
+  ).map(routeOption => ({
     ...routeOption,
     src: resolve(root, routeOption.src),
-  }));
+  }))
 
-  const experimental = { ...options.experimental };
+  const experimental = { ...options.experimental }
 
   if (experimental.autoExportsDataLoaders) {
     experimental.autoExportsDataLoaders = (
       Array.isArray(experimental.autoExportsDataLoaders)
         ? experimental.autoExportsDataLoaders
         : [experimental.autoExportsDataLoaders]
-    ).map((path) => resolve(root, path));
+    ).map(path => resolve(root, path))
   }
 
   if (options.extensions) {
@@ -319,27 +319,27 @@ export function resolveOptions(options: Options) {
       // this is needed when filtering the files with the pattern .{vue,js,ts}
       // in src/index.ts
       .map((ext) => {
-        if (!ext.startsWith(".")) {
-          warn(`Invalid extension "${ext}". Extensions must start with a dot.`);
-          return "." + ext;
+        if (!ext.startsWith('.')) {
+          warn(`Invalid extension "${ext}". Extensions must start with a dot.`)
+          return `.${ext}`
         }
-        return ext;
+        return ext
       })
       // sort extensions by length to ensure that the longest one is used first
       // e.g. ['.vue', '.page.vue'] -> ['.page.vue', '.vue'] as both would match and order matters
-      .sort((a, b) => b.length - a.length);
+      .sort((a, b) => b.length - a.length)
   }
 
   const filePatterns = options.filePatterns
     ? isArray(options.filePatterns)
       ? options.filePatterns
       : [options.filePatterns]
-    : DEFAULT_OPTIONS.filePatterns;
+    : DEFAULT_OPTIONS.filePatterns
   const exclude = options.exclude
     ? isArray(options.exclude)
       ? options.exclude
       : [options.exclude]
-    : DEFAULT_OPTIONS.exclude;
+    : DEFAULT_OPTIONS.exclude
 
   return {
     ...DEFAULT_OPTIONS,
@@ -348,10 +348,10 @@ export function resolveOptions(options: Options) {
     routesFolder,
     filePatterns,
     exclude,
-  };
+  }
 }
 
-export type ResolvedOptions = ReturnType<typeof resolveOptions>;
+export type ResolvedOptions = ReturnType<typeof resolveOptions>
 
 /**
  * Merge all the possible extensions as an array of unique values
@@ -359,19 +359,19 @@ export type ResolvedOptions = ReturnType<typeof resolveOptions>;
  * @internal
  */
 export function mergeAllExtensions(options: ResolvedOptions): string[] {
-  const allExtensions = new Set(options.extensions);
+  const allExtensions = new Set(options.extensions)
 
   for (const routeOption of options.routesFolder) {
     if (routeOption.extensions) {
       const extensions = resolveOverridableOption(
         options.extensions,
         routeOption.extensions,
-      );
+      )
       for (const ext of extensions) {
-        allExtensions.add(ext);
+        allExtensions.add(ext)
       }
     }
   }
 
-  return Array.from(allExtensions.values());
+  return Array.from(allExtensions.values())
 }

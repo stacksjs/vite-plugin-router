@@ -1,23 +1,23 @@
-export { defineColadaLoader } from "../defineColadaLoader";
 export type {
-  DataLoaderColadaEntry,
+  _DataMaybeLazy,
+  DataLoaderContextBase,
+  DataLoaderEntryBase,
+  DefineDataLoader,
+  DefineDataLoaderCommit,
+  DefineDataLoaderOptionsBase,
+  DefineLoaderFn,
+  UseDataLoader,
+  UseDataLoaderInternals,
+  UseDataLoaderResult,
+} from '../createDataLoader'
+export { defineColadaLoader } from '../defineColadaLoader'
+export type {
   DataColadaLoaderContext,
-  DefineDataColadaLoaderOptions_LaxData,
-  UseDataLoaderColadaResult,
-  UseDataLoaderColada_LaxData,
-  UseDataLoaderColada_DefinedData,
+  DataLoaderColadaEntry,
   // deprecated
   DefineDataColadaLoaderOptions,
-} from "../defineColadaLoader";
-// export type {
-//   UseDataLoader,
-//   UseDataLoaderInternals,
-//   UseDataLoaderResult,
-//   DataLoaderContextBase,
-//   DataLoaderEntryBase,
-//   DefineDataLoaderOptionsBase,
-//   DefineLoaderFn,
-//   _DataMaybeLazy,
-//   DefineDataLoader,
-//   DefineDataLoaderCommit,
-// } from '../createDataLoader'
+  DefineDataColadaLoaderOptions_LaxData,
+  UseDataLoaderColada_DefinedData,
+  UseDataLoaderColada_LaxData,
+  UseDataLoaderColadaResult,
+} from '../defineColadaLoader'

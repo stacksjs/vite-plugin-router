@@ -1,6 +1,6 @@
-import { RouteMeta } from "vue-router";
-import { CustomRouteBlock } from "./customBlock";
-import { type TreeNode } from "./tree";
+import type { RouteMeta } from 'vue-router'
+import type { CustomRouteBlock } from './customBlock'
+import type { TreeNode } from './tree'
 
 /**
  * A route node that can be modified by the user. The tree can be iterated to be traversed.
@@ -15,18 +15,18 @@ import { type TreeNode } from "./tree";
  * @experimental
  */
 export class EditableTreeNode {
-  private node: TreeNode;
+  private node: TreeNode
   // private _parent?: EditableTreeNode
 
   constructor(node: TreeNode) {
-    this.node = node;
+    this.node = node
   }
 
   /**
    * Remove and detach the current route node from the tree. Subsequently, its children will be removed as well.
    */
   delete() {
-    return this.node.delete();
+    return this.node.delete()
   }
 
   /**
@@ -39,28 +39,28 @@ export class EditableTreeNode {
    */
   insert(path: string, filePath: string) {
     // adapt paths as they should match a file system
-    let addBackLeadingSlash = false;
-    if (path.startsWith("/")) {
+    let addBackLeadingSlash = false
+    if (path.startsWith('/')) {
       // at the root of the tree, the path is relative to the root so we remove
       // the leading slash
-      path = path.slice(1);
+      path = path.slice(1)
       // but in other places we need to instruct the path is at the root so we change it afterwards
-      addBackLeadingSlash = !this.node.isRoot();
+      addBackLeadingSlash = !this.node.isRoot()
     }
-    const node = this.node.insertParsedPath(path, filePath);
-    const editable = new EditableTreeNode(node);
+    const node = this.node.insertParsedPath(path, filePath)
+    const editable = new EditableTreeNode(node)
     if (addBackLeadingSlash) {
-      editable.path = "/" + node.path;
+      editable.path = `/${node.path}`
     }
     // TODO: read definePage from file or is this fine?
-    return editable;
+    return editable
   }
 
   /**
    * Get an editable version of the parent node if it exists.
    */
   get parent() {
-    return this.node.parent && new EditableTreeNode(this.node.parent);
+    return this.node.parent && new EditableTreeNode(this.node.parent)
   }
 
   /**
@@ -69,14 +69,14 @@ export class EditableTreeNode {
    * By default, the name of the view is `default`.
    */
   get components() {
-    return this.node.value.components;
+    return this.node.value.components
   }
 
   /**
    * Alias for `route.components.get('default')`.
    */
   get component() {
-    return this.node.value.components.get("default");
+    return this.node.value.components.get('default')
   }
 
   /**
@@ -86,14 +86,14 @@ export class EditableTreeNode {
    * @see {@link isPassThrough}
    */
   get name(): string {
-    return this.node.name;
+    return this.node.name
   }
 
   /**
    * Override the name of the route.
    */
   set name(name: string | undefined) {
-    this.node.value.addEditOverride({ name });
+    this.node.value.addEditOverride({ name })
   }
 
   /**
@@ -101,14 +101,14 @@ export class EditableTreeNode {
    * used to group other routes under the same prefix `path` and/or `meta` properties.
    */
   get isPassThrough() {
-    return this.node.value.components.size === 0;
+    return this.node.value.components.size === 0
   }
 
   /**
    * Meta property of the route as an object. Note this property is readonly and will be serialized as JSON. It won't contain the meta properties defined with `definePage()` as it could contain expressions **but it does contain the meta properties defined with `<route>` blocks**.
    */
   get meta(): Readonly<RouteMeta> {
-    return this.node.metaAsObject;
+    return this.node.metaAsObject
   }
 
   /**
@@ -117,8 +117,8 @@ export class EditableTreeNode {
    * @see {@link addToMeta}
    */
   set meta(meta: RouteMeta) {
-    this.node.value.removeOverride("meta");
-    this.node.value.setEditOverride("meta", meta);
+    this.node.value.removeOverride('meta')
+    this.node.value.setEditOverride('meta', meta)
   }
 
   /**
@@ -127,14 +127,14 @@ export class EditableTreeNode {
    * or any other non-serializable value.
    */
   addToMeta(meta: Partial<RouteMeta>) {
-    this.node.value.addEditOverride({ meta });
+    this.node.value.addEditOverride({ meta })
   }
 
   /**
    * Path of the route without parent paths.
    */
   get path() {
-    return this.node.path;
+    return this.node.path
   }
 
   /**
@@ -144,19 +144,19 @@ export class EditableTreeNode {
     // automatically prefix the path with `/` if the route is at the root of the tree
     // that matches the behavior of node.insert('path', 'file.vue') that also adds it
     if (
-      (!this.node.parent || this.node.parent.isRoot()) &&
-      !path.startsWith("/")
+      (!this.node.parent || this.node.parent.isRoot())
+      && !path.startsWith('/')
     ) {
-      path = "/" + path;
+      path = `/${path}`
     }
-    this.node.value.addEditOverride({ path });
+    this.node.value.addEditOverride({ path })
   }
 
   /**
    * Alias of the route.
    */
   get alias() {
-    return this.node.value.overrides.alias;
+    return this.node.value.overrides.alias
   }
 
   /**
@@ -164,8 +164,8 @@ export class EditableTreeNode {
    *
    * @param alias - Alias to add to the route
    */
-  addAlias(alias: CustomRouteBlock["alias"]) {
-    this.node.value.addEditOverride({ alias });
+  addAlias(alias: CustomRouteBlock['alias']) {
+    this.node.value.addEditOverride({ alias })
   }
 
   /**
@@ -173,14 +173,14 @@ export class EditableTreeNode {
    * you need to update both.
    */
   get params() {
-    return this.node.params;
+    return this.node.params
   }
 
   /**
    * Path of the route including parent paths.
    */
   get fullPath() {
-    return this.node.fullPath;
+    return this.node.fullPath
   }
 
   /**
@@ -189,8 +189,8 @@ export class EditableTreeNode {
    */
   get children(): EditableTreeNode[] {
     return [...this.node.children.values()].map(
-      (node) => new EditableTreeNode(node),
-    );
+      node => new EditableTreeNode(node),
+    )
   }
 
   /**
@@ -202,18 +202,18 @@ export class EditableTreeNode {
    * }
    * ```
    */
-  *traverseDFS(): Generator<EditableTreeNode, void, unknown> {
+  * traverseDFS(): Generator<EditableTreeNode, void, unknown> {
     // The root node is not a route, so we skip it
     if (!this.node.isRoot()) {
-      yield this;
+      yield this
     }
     for (const [_name, child] of this.node.children) {
-      yield* new EditableTreeNode(child).traverseDFS();
+      yield* new EditableTreeNode(child).traverseDFS()
     }
   }
 
-  *[Symbol.iterator](): Generator<EditableTreeNode, void, unknown> {
-    yield* this.traverseBFS();
+  * [Symbol.iterator](): Generator<EditableTreeNode, void, unknown> {
+    yield* this.traverseBFS()
   }
 
   /**
@@ -226,13 +226,13 @@ export class EditableTreeNode {
    * }
    * ```
    */
-  *traverseBFS(): Generator<EditableTreeNode, void, unknown> {
+  * traverseBFS(): Generator<EditableTreeNode, void, unknown> {
     for (const [_name, child] of this.node.children) {
-      yield new EditableTreeNode(child);
+      yield new EditableTreeNode(child)
     }
     // we need to traverse again in case the user removed a route
     for (const [_name, child] of this.node.children) {
-      yield* new EditableTreeNode(child).traverseBFS();
+      yield* new EditableTreeNode(child).traverseBFS()
     }
   }
 }

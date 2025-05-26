@@ -1,12 +1,12 @@
-import { ts } from "../utils";
+import { ts } from '../utils'
 
 export function generateDTS({
   routesModule,
   routeNamedMap,
 }: {
-  vueRouterModule: string;
-  routesModule: string;
-  routeNamedMap: string;
+  vueRouterModule: string
+  routesModule: string
+  routeNamedMap: string
 }) {
   return ts`
 /* eslint-disable */
@@ -30,10 +30,10 @@ declare module '${routesModule}' {
    */
 ${routeNamedMap
   // remove empty lines and indent by two spaces to match the rest of the file
-  .split("\n")
-  .filter((line) => line.length !== 0)
-  .map((line) => "  " + line)
-  .join("\n")}
+  .split('\n')
+  .filter(line => line.length !== 0)
+  .map(line => `  ${line}`)
+  .join('\n')}
 }
-`.trimStart();
+`.trimStart()
 }

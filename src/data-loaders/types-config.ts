@@ -22,4 +22,4 @@ export interface TypesConfig {
  * @internal
  */
 export type ErrorDefault =
-  TypesConfig extends Record<"Error", infer E> ? E : Error;
+  TypesConfig extends Record<'Error', infer E> ? E : Error

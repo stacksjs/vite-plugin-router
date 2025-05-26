@@ -1,18 +1,18 @@
-import { describe, expectTypeOf, it } from "vitest";
-import { defineComponent } from "vue";
-import { createRouter, createMemoryHistory } from "vue-router";
-import { defineBasicLoader } from "./defineLoader";
-import type { UseDataLoader } from "./createDataLoader";
+import type { UseDataLoader } from './createDataLoader'
+import { describe, expectTypeOf, it } from 'vitest'
+import { defineComponent } from 'vue'
+import { createMemoryHistory, createRouter } from 'vue-router'
+import { defineBasicLoader } from './defineLoader'
 
-describe("meta-extensions", () => {
-  it("works when adding routes", () => {
-    const component = defineComponent({});
+describe('meta-extensions', () => {
+  it('works when adding routes', () => {
+    const component = defineComponent({})
     const router = createRouter({
       history: createMemoryHistory(),
       routes: [
         // empty
         {
-          path: "/",
+          path: '/',
           component,
           meta: {
             loaders: [],
@@ -21,75 +21,75 @@ describe("meta-extensions", () => {
 
         // mixed
         {
-          path: "/",
+          path: '/',
           component,
           meta: {
             loaders: [
-              defineBasicLoader(async () => ({ name: "foo" })),
-              defineBasicLoader(async () => ({ name: "foo" }), {}),
-              defineBasicLoader(async () => ({ name: "foo" }), { lazy: true }),
-              defineBasicLoader(async () => ({ name: "foo" }), { lazy: false }),
+              defineBasicLoader(async () => ({ name: 'foo' })),
+              defineBasicLoader(async () => ({ name: 'foo' }), {}),
+              defineBasicLoader(async () => ({ name: 'foo' }), { lazy: true }),
+              defineBasicLoader(async () => ({ name: 'foo' }), { lazy: false }),
             ],
           },
         },
 
         // only lazy: true
         {
-          path: "/",
+          path: '/',
           component,
           meta: {
             loaders: [
-              defineBasicLoader(async () => ({ name: "foo" }), { lazy: true }),
-              defineBasicLoader(async () => ({ name: "foo" }), { lazy: true }),
+              defineBasicLoader(async () => ({ name: 'foo' }), { lazy: true }),
+              defineBasicLoader(async () => ({ name: 'foo' }), { lazy: true }),
             ],
           },
         },
 
         // only lazy: false
         {
-          path: "/",
+          path: '/',
           component,
           meta: {
             loaders: [
-              defineBasicLoader(async () => ({ name: "foo" }), { lazy: false }),
-              defineBasicLoader(async () => ({ name: "foo" }), { lazy: false }),
+              defineBasicLoader(async () => ({ name: 'foo' }), { lazy: false }),
+              defineBasicLoader(async () => ({ name: 'foo' }), { lazy: false }),
             ],
           },
         },
       ],
-    });
+    })
 
     router.addRoute({
-      path: "/",
+      path: '/',
       component,
       meta: {
         loaders: [
-          defineBasicLoader(async () => ({ name: "foo" }), { lazy: false }),
-          defineBasicLoader(async () => ({ name: "foo" }), { lazy: false }),
+          defineBasicLoader(async () => ({ name: 'foo' }), { lazy: false }),
+          defineBasicLoader(async () => ({ name: 'foo' }), { lazy: false }),
         ],
       },
-    });
+    })
 
     router.addRoute({
-      path: "/",
+      path: '/',
       component,
       meta: {
         loaders: [
-          defineBasicLoader(async () => ({ name: "foo" }), { lazy: true }),
-          defineBasicLoader(async () => ({ name: "foo" }), { lazy: true }),
+          defineBasicLoader(async () => ({ name: 'foo' }), { lazy: true }),
+          defineBasicLoader(async () => ({ name: 'foo' }), { lazy: true }),
         ],
       },
-    });
-  });
+    })
+  })
 
-  it("works when checking the type of meta", () => {
+  it('works when checking the type of meta', () => {
     const router = createRouter({
       history: createMemoryHistory(),
       routes: [],
-    });
+    })
 
     expectTypeOf<UseDataLoader[] | undefined>(
       router.currentRoute.value.meta.loaders,
-    );
-  });
-});
+    )
+  })
+})

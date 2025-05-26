@@ -41,7 +41,7 @@ Add VueRouter plugin **before** Vue plugin:
 
 ```ts
 // vite.config.ts
-import VueRouter from "vite-plugin-routes/vite";
+import VueRouter from 'vite-plugin-routes/vite'
 
 export default defineConfig({
   plugins: [
@@ -51,7 +51,7 @@ export default defineConfig({
     // ⚠️ Vue must be placed after VueRouter()
     Vue(),
   ],
-});
+})
 ```
 
 <br></details>
@@ -61,7 +61,7 @@ export default defineConfig({
 
 ```ts
 // rollup.config.js
-import VueRouter from "vite-plugin-routes/rollup";
+import VueRouter from 'vite-plugin-routes/rollup'
 
 export default {
   plugins: [
@@ -71,7 +71,7 @@ export default {
     // ⚠️ Vue must be placed after VueRouter()
     Vue(),
   ],
-};
+}
 ```
 
 <br></details>
@@ -84,11 +84,11 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require("vite-plugin-routes/webpack")({
+    require('vite-plugin-routes/webpack')({
       /* options */
     }),
   ],
-};
+}
 ```
 
 <br></details>
@@ -101,12 +101,12 @@ module.exports = {
 module.exports = {
   configureWebpack: {
     plugins: [
-      require("vite-plugin-routes/webpack")({
+      require('vite-plugin-routes/webpack')({
         /* options */
       }),
     ],
   },
-};
+}
 ```
 
 <br></details>
@@ -116,12 +116,12 @@ module.exports = {
 
 ```ts
 // esbuild.config.js
-import { build } from "esbuild";
-import VueRouter from "vite-plugin-routes/esbuild";
+import { build } from 'esbuild'
+import VueRouter from 'vite-plugin-routes/esbuild'
 
 build({
   plugins: [VueRouter()],
-});
+})
 ```
 
 <br></details>
@@ -181,7 +181,7 @@ createRouter({
 
 ```ts
 // vite.config.ts
-import VueRouter from "vite-plugin-routes/vite";
+import VueRouter from 'vite-plugin-routes/vite'
 
 export default defineConfig({
   plugins: [
@@ -193,7 +193,7 @@ export default defineConfig({
     }),
     Vue(),
   ],
-});
+})
 ```
 
 ### Available Options

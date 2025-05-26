@@ -1,24 +1,24 @@
-export { defineBasicLoader } from "../defineLoader";
+export type {
+  _DataMaybeLazy,
+  DataLoaderContextBase,
+  DataLoaderEntryBase,
+  DefineDataLoader,
+  DefineDataLoaderCommit,
+  DefineDataLoaderOptionsBase,
+  DefineLoaderFn,
+  UseDataLoader,
+  UseDataLoaderInternals,
+  UseDataLoaderResult,
+} from '../createDataLoader'
+export { defineBasicLoader } from '../defineLoader'
+
 export type {
   DataLoaderContext,
-  UseDataLoaderBasic_LaxData,
-  UseDataLoaderBasic_DefinedData,
-  DefineDataLoaderOptions_LaxData,
-  DefineDataLoaderOptions_DefinedData,
   // deprecated
   DefineDataLoaderOptions,
+  DefineDataLoaderOptions_DefinedData,
+  DefineDataLoaderOptions_LaxData,
   UseDataLoaderBasic,
-} from "../defineLoader";
-
-// export type {
-//   UseDataLoader,
-//   UseDataLoaderInternals,
-//   UseDataLoaderResult,
-//   DataLoaderContextBase,
-//   DataLoaderEntryBase,
-//   DefineDataLoaderOptionsBase,
-//   DefineLoaderFn,
-//   _DataMaybeLazy,
-//   DefineDataLoader,
-//   DefineDataLoaderCommit,
-// } from '../createDataLoader'
+  UseDataLoaderBasic_DefinedData,
+  UseDataLoaderBasic_LaxData,
+} from '../defineLoader'
