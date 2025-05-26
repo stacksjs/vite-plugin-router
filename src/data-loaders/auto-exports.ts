@@ -34,7 +34,7 @@ export function extractLoadersToExport(
   return importNames;
 }
 
-const PLUGIN_NAME = "vite-plugin-router:data-loaders-auto-export";
+const PLUGIN_NAME = "vite-plugin-routes:data-loaders-auto-export";
 
 /**
  * {@link AutoExportLoaders} options.

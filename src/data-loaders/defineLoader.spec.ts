@@ -24,7 +24,7 @@ import {
   NavigationResult,
   UseDataLoader,
   setCurrentContext,
-} from "vite-plugin-router/data-loaders";
+} from "vite-plugin-routes/data-loaders";
 import { testDefineLoader } from "../../tests/data-loaders";
 import { getRouter } from "vue-router-mock";
 import { enableAutoUnmount, mount } from "@vue/test-utils";

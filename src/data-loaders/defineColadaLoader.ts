@@ -30,7 +30,7 @@ import {
   setCurrentContext,
   trackRoute,
   IS_SSR_KEY,
-} from "vite-plugin-router/data-loaders";
+} from "vite-plugin-routes/data-loaders";
 import {} from "./utils";
 import { type ShallowRef, shallowRef, watch } from "vue";
 import {
@@ -161,7 +161,7 @@ export function defineColadaLoader<Data>(
     if (process.env.NODE_ENV === "development") {
       if (parent !== currentContext[0]) {
         console.warn(
-          `❌👶 "${key}" has a different parent than the current context. This shouldn't be happening. Please report a bug with a reproduction to https://github.com/stacksjs/vite-plugin-router`,
+          `❌👶 "${key}" has a different parent than the current context. This shouldn't be happening. Please report a bug with a reproduction to https://github.com/stacksjs/vite-plugin-routes`,
         );
       }
     }

@@ -11,7 +11,7 @@ export function warn(
   msg: string,
   type: "warn" | "error" | "debug" = "warn",
 ): void {
-  console[type](`⚠️  [vite-plugin-router]: ${msg}`);
+  console[type](`⚠️  [vite-plugin-routes]: ${msg}`);
 }
 
 export function logTree(tree: TreeNode, log: (str: string) => any) {

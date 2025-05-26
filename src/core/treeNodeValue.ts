@@ -237,7 +237,7 @@ export type TreeNodeValue =
 
 export interface TreeNodeValueOptions extends ParseSegmentOptions {
   /**
-   * Format of the route path. Defaults to `file` which is the format used by vite-plugin-router and matches the file
+   * Format of the route path. Defaults to `file` which is the format used by vite-plugin-routes and matches the file
    * structure (e.g. `index`, ``, or `users/[id]`). In `path` format, routes are expected in the format of vue-router
    * (e.g. `/` or '/users/:id' ).
    *

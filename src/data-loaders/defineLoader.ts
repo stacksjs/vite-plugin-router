@@ -23,7 +23,7 @@ import {
   getCurrentContext,
   setCurrentContext,
   IS_SSR_KEY,
-} from "vite-plugin-router/data-loaders";
+} from "vite-plugin-routes/data-loaders";
 
 import { shallowRef } from "vue";
 import {
@@ -191,7 +191,7 @@ export function defineBasicLoader<Data>(
     if (process.env.NODE_ENV === "development") {
       if (parent !== currentContext[0]) {
         console.warn(
-          `❌👶 "${options.key}" has a different parent than the current context. This shouldn't be happening. Please report a bug with a reproduction to https://github.com/stacksjs/vite-plugin-router`,
+          `❌👶 "${options.key}" has a different parent than the current context. This shouldn't be happening. Please report a bug with a reproduction to https://github.com/stacksjs/vite-plugin-routes`,
         );
       }
     }
@@ -361,7 +361,7 @@ export function defineBasicLoader<Data>(
     if (parentEntry) {
       if (parentEntry === entry) {
         console.warn(
-          `👶❌ "${options.key}" has itself as parent. This shouldn't be happening. Please report a bug with a reproduction to https://github.com/stacksjs/vite-plugin-router`,
+          `👶❌ "${options.key}" has itself as parent. This shouldn't be happening. Please report a bug with a reproduction to https://github.com/stacksjs/vite-plugin-routes`,
         );
       }
       // console.log(`👶 "${options.key}" has parent ${parentEntry}`)

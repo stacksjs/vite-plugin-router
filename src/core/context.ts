@@ -203,7 +203,7 @@ if (import.meta.hot) {
   import.meta.hot.accept((mod) => {
     const router = import.meta.hot.data.router
     if (!router) {
-      import.meta.hot.invalidate('[vite-plugin-router:HMR] Cannot replace the routes because there is no active router. Reloading.')
+      import.meta.hot.invalidate('[vite-plugin-routes:HMR] Cannot replace the routes because there is no active router. Reloading.')
       return
     }
     router.clearRoutes()

@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "vite-plugin-router",
+      "name": "vite-plugin-routes",
       "dependencies": {
         "@vue-macros/common": "3.0.0-beta.12",
         "ast-walker-scope": "^0.8.1",

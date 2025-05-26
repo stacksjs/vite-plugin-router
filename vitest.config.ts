@@ -7,13 +7,13 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: "vite-plugin-router/runtime",
+        find: "vite-plugin-routes/runtime",
         replacement: fileURLToPath(
           new URL("./src/runtime.ts", import.meta.url),
         ),
       },
       {
-        find: "vite-plugin-router/data-loaders",
+        find: "vite-plugin-routes/data-loaders",
         replacement: fileURLToPath(
           new URL("./src/data-loaders/entries/index.ts", import.meta.url),
         ),

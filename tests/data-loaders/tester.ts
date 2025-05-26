@@ -21,7 +21,7 @@ import {
   type DataLoaderContextBase,
   type DefineDataLoaderOptionsBase_LaxData,
   type UseDataLoader,
-} from "vite-plugin-router/data-loaders";
+} from "vite-plugin-routes/data-loaders";
 import { mockPromise } from "../utils";
 import RouterViewMock from "../data-loaders/RouterViewMock.vue";
 import ComponentWithNestedLoader from "../data-loaders/ComponentWithNestedLoader.vue";

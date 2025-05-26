@@ -107,7 +107,7 @@ export type _RoutesFolder = string | RoutesFolderOption;
 export type RoutesFolder = _RoutesFolder[] | _RoutesFolder;
 
 /**
- * vite-plugin-router plugin options.
+ * vite-plugin-routes plugin options.
  */
 export interface Options {
   /**

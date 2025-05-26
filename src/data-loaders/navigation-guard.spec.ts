@@ -25,7 +25,7 @@ import {
   NavigationResult,
   DataLoaderPluginOptions,
   useIsDataLoading,
-} from "vite-plugin-router/data-loaders";
+} from "vite-plugin-routes/data-loaders";
 import { mockPromise } from "../../tests/utils";
 import {
   useDataOne,

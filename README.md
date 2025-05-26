@@ -1,4 +1,4 @@
-# vite-plugin-router
+# vite-plugin-routes
 
 <p align="center"><img src=".github/art/cover.jpg" alt="Social Card of this repo"></p>
 
@@ -23,13 +23,13 @@
 ## Install
 
 ```bash
-npm install -D vite-plugin-router
+npm install -D vite-plugin-routes
 # or
-yarn add -D vite-plugin-router
+yarn add -D vite-plugin-routes
 # or
-pnpm add -D vite-plugin-router
+pnpm add -D vite-plugin-routes
 # or
-bun add -D vite-plugin-router
+bun add -D vite-plugin-routes
 ```
 
 ## Get Started
@@ -41,7 +41,7 @@ Add VueRouter plugin **before** Vue plugin:
 
 ```ts
 // vite.config.ts
-import VueRouter from "vite-plugin-router/vite";
+import VueRouter from "vite-plugin-routes/vite";
 
 export default defineConfig({
   plugins: [
@@ -61,7 +61,7 @@ export default defineConfig({
 
 ```ts
 // rollup.config.js
-import VueRouter from "vite-plugin-router/rollup";
+import VueRouter from "vite-plugin-routes/rollup";
 
 export default {
   plugins: [
@@ -84,7 +84,7 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require("vite-plugin-router/webpack")({
+    require("vite-plugin-routes/webpack")({
       /* options */
     }),
   ],
@@ -101,7 +101,7 @@ module.exports = {
 module.exports = {
   configureWebpack: {
     plugins: [
-      require("vite-plugin-router/webpack")({
+      require("vite-plugin-routes/webpack")({
         /* options */
       }),
     ],
@@ -117,7 +117,7 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from "esbuild";
-import VueRouter from "vite-plugin-router/esbuild";
+import VueRouter from "vite-plugin-routes/esbuild";
 
 build({
   plugins: [VueRouter()],
@@ -145,21 +145,21 @@ After installing, **you should run your dev server** (usually `npm run dev`) **t
 }
 ```
 
-Then, if you have an `env.d.ts` file like the one created by `npm vue create <my-project>`, add the `vite-plugin-router/client` types to it:
+Then, if you have an `env.d.ts` file like the one created by `npm vue create <my-project>`, add the `vite-plugin-routes/client` types to it:
 
 ```ts
 // env.d.ts
 /// <reference types="vite/client" />
-/// <reference types="vite-plugin-router/client" />
+/// <reference types="vite-plugin-routes/client" />
 ```
 
-If you don't have an `env.d.ts` file, you can create one and add the vite-plugin-router types to it _or_ you can add them to the `types` property in your `tsconfig.json`:
+If you don't have an `env.d.ts` file, you can create one and add the vite-plugin-routes types to it _or_ you can add them to the `types` property in your `tsconfig.json`:
 
 ```json
 {
   "compilerOptions": {
     // ...
-    "types": ["vite-plugin-router/client"]
+    "types": ["vite-plugin-routes/client"]
   }
 }
 ```
@@ -181,7 +181,7 @@ createRouter({
 
 ```ts
 // vite.config.ts
-import VueRouter from "vite-plugin-router/vite";
+import VueRouter from "vite-plugin-routes/vite";
 
 export default defineConfig({
   plugins: [
@@ -212,7 +212,7 @@ bun test
 
 ## Changelog
 
-Please see our [releases](https://github.com/stacksjs/vite-plugin-router/releases) page for more information on what has changed recently.
+Please see our [releases](https://github.com/stacksjs/vite-plugin-routes/releases) page for more information on what has changed recently.
 
 ## Contributing
 
@@ -230,7 +230,7 @@ For casual chit-chat with others using this package:
 
 ## Postcardware
 
-"Software that is free, but hopes for a postcard." We love receiving postcards from around the world showing where `vite-plugin-router` is being used! We showcase them on our website too.
+"Software that is free, but hopes for a postcard." We love receiving postcards from around the world showing where `vite-plugin-routes` is being used! We showcase them on our website too.
 
 Our address: Stacks.js, 12665 Village Ln #2306, Playa Vista, CA 90094, United States 🌎
 
@@ -243,7 +243,7 @@ We would like to extend our thanks to the following sponsors for funding Stacks 
 
 ## Credits
 
-- [All Contributors](https://github.com/stacksjs/vite-plugin-router/contributors)
+- [All Contributors](https://github.com/stacksjs/vite-plugin-routes/contributors)
 
 ## License
 
@@ -252,11 +252,11 @@ The MIT License (MIT). Please see [LICENSE](https://github.com/stacksjs/stacks/t
 Made with 💙
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/vite-plugin-router?style=flat-square
-[npm-version-href]: https://npmjs.com/package/vite-plugin-router
-[github-actions-src]: https://img.shields.io/github/actions/workflow/status/stacksjs/vite-plugin-router/ci.yml?style=flat-square&branch=main
-[github-actions-href]: https://github.com/stacksjs/vite-plugin-router/actions?query=workflow%3Aci
-<!-- [npm-downloads-src]: https://img.shields.io/npm/dm/vite-plugin-router?style=flat-square
-[npm-downloads-href]: https://npmjs.com/package/vite-plugin-router -->
-<!-- [codecov-src]: https://img.shields.io/codecov/c/gh/stacksjs/vite-plugin-router/main?style=flat-square
-[codecov-href]: https://codecov.io/gh/stacksjs/vite-plugin-router -->
+[npm-version-src]: https://img.shields.io/npm/v/vite-plugin-routes?style=flat-square
+[npm-version-href]: https://npmjs.com/package/vite-plugin-routes
+[github-actions-src]: https://img.shields.io/github/actions/workflow/status/stacksjs/vite-plugin-routes/ci.yml?style=flat-square&branch=main
+[github-actions-href]: https://github.com/stacksjs/vite-plugin-routes/actions?query=workflow%3Aci
+<!-- [npm-downloads-src]: https://img.shields.io/npm/dm/vite-plugin-routes?style=flat-square
+[npm-downloads-href]: https://npmjs.com/package/vite-plugin-routes -->
+<!-- [codecov-src]: https://img.shields.io/codecov/c/gh/stacksjs/vite-plugin-routes/main?style=flat-square
+[codecov-href]: https://codecov.io/gh/stacksjs/vite-plugin-routes -->

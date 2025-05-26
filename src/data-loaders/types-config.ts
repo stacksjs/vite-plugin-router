@@ -4,9 +4,9 @@
  * @example
  * ```ts
  * // types-extension.d.ts
- * import 'vite-plugin-router/data-loaders'
+ * import 'vite-plugin-routes/data-loaders'
  * export {}
- * declare module 'vite-plugin-router/data-loaders' {
+ * declare module 'vite-plugin-routes/data-loaders' {
  *   interface TypesConfig {
  *     Error: MyCustomError
  *   }

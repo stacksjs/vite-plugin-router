@@ -65,7 +65,7 @@ export default createUnplugin<Options | undefined>((opt = {}, _meta) => {
 
   const plugins: UnpluginOptions[] = [
     {
-      name: "vite-plugin-router",
+      name: "vite-plugin-routes",
       enforce: "pre",
 
       resolveId(id) {
@@ -216,7 +216,7 @@ export { EditableTreeNode } from "./core/extendRoutes";
  * Adds useful auto imports to the AutoImport config:
  * @example
  * ```js
- * import { VueRouterAutoImports } from 'vite-plugin-router'
+ * import { VueRouterAutoImports } from 'vite-plugin-routes'
  *
  * AutoImport({
  *   imports: [VueRouterAutoImports],
@@ -232,8 +232,8 @@ export const VueRouterAutoImports: Record<
     "useRouter",
     "onBeforeRouteUpdate",
     "onBeforeRouteLeave",
-    // NOTE: the typing seems broken locally, so instead we export it directly from vite-plugin-router/runtime
+    // NOTE: the typing seems broken locally, so instead we export it directly from vite-plugin-routes/runtime
     // 'definePage',
   ],
-  "vite-plugin-router/runtime": [],
+  "vite-plugin-routes/runtime": [],
 };

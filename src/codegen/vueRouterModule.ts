@@ -13,14 +13,14 @@ export function generateVueRouterProxy(
 import { createRouter as _createRouter } from 'vue-router'
 
 export * from 'vue-router'
-export { definePage } from 'vite-plugin-router/runtime'
+export { definePage } from 'vite-plugin-routes/runtime'
 export {
   DataLoaderPlugin,
   NavigationResult,
-} from 'vite-plugin-router/data-loaders'
+} from 'vite-plugin-routes/data-loaders'
 
-export * from 'vite-plugin-router/data-loaders/basic'
-${addPiniaColada ? "export * from 'vite-plugin-router/data-loaders/pinia-colada'" : ""}
+export * from 'vite-plugin-routes/data-loaders/basic'
+${addPiniaColada ? "export * from 'vite-plugin-routes/data-loaders/pinia-colada'" : ""}
 
 export function createRouter(options) {
   const { extendRoutes, routes } = options

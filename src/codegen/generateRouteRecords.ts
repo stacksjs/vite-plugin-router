@@ -100,7 +100,7 @@ ${startIndent}}`;
   if (definePageDataList.length > 0) {
     // remove one tab
     const mergeCallIndent = startIndent.slice(2);
-    importsMap.add("vite-plugin-router/runtime", "_mergeRouteRecord");
+    importsMap.add("vite-plugin-routes/runtime", "_mergeRouteRecord");
     return `${mergeCallIndent}_mergeRouteRecord(
 ${routeRecord},
 ${definePageDataList.map((s) => startIndent + s).join(",\n")}

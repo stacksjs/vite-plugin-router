@@ -6,7 +6,7 @@ export default defineConfig([
     ...commonOptions,
     clean: false,
     entry: ["./src/runtime.ts"],
-    external: [...commonOptions.external, "vite-plugin-router/types"],
+    external: [...commonOptions.external, "vite-plugin-routes/types"],
   },
 
   {
@@ -17,9 +17,9 @@ export default defineConfig([
     outDir: "dist/data-loaders",
     external: [
       ...commonOptions.external,
-      "vite-plugin-router/types",
-      "vite-plugin-router/runtime",
-      "vite-plugin-router/data-loaders",
+      "vite-plugin-routes/types",
+      "vite-plugin-routes/runtime",
+      "vite-plugin-routes/data-loaders",
     ],
   },
 ]);

@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-router",
+  "name": "vite-plugin-routes",
   "version": "0.1.0",
   "type": "module",
   "packageManager": "pnpm@10.11.0",
@@ -18,14 +18,14 @@
     "nuxt",
     "router"
   ],
-  "homepage": "https://github.com/stacksjs/vite-plugin-router#readme",
+  "homepage": "https://github.com/stacksjs/vite-plugin-routes#readme",
   "bugs": {
-    "url": "https://github.com/stacksjs/vite-plugin-router/issues"
+    "url": "https://github.com/stacksjs/vite-plugin-routes/issues"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stacksjs/vite-plugin-router.git"
+    "url": "git+https://github.com/stacksjs/vite-plugin-routes.git"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.js",
