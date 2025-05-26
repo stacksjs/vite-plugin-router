@@ -1,0 +1,52 @@
+{
+  "include": [
+    "./src/**/*.ts",
+    "./src/*.d.ts",
+    "./client.d.ts",
+    "./tests/**/*.ts,"
+  ],
+  "exclude": [
+    "./src/**/*.test-d.ts",
+    // "./src/**/*.spec.ts",
+    // "./src/data-loaders/defineQueryLoader.ts",
+    // "./src/data-loaders/defineVueFireLoader.ts",
+    "node_modules",
+    "dist"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "preserve",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Bundler",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strict": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "vite-plugin-router": ["./src/index.ts"],
+      "vite-plugin-router/types": ["./src/types.ts"],
+      "vite-plugin-router/runtime": ["./src/runtime.ts"],
+      "vite-plugin-router/data-loaders": ["./src/data-loaders/entries/index.ts"]
+    },
+    "types": ["node", "vite/client"]
+  },
+  "vueCompilerOptions": {
+    "plugins": []
+  }
+}
