@@ -156,7 +156,7 @@ When working on an individual Stack, tests are stored within the `./tests` proje
 
 ## ✍️ Commit
 
-Stacks uses [semantic commit messages][semantic-commit-style] to automate package releases. No worries, you may not be aware what this is or how it works—just let Buddy guide you. Stacks automated the commit process for you, simply run `buddy commit` in your terminal and follow the instructions.
+Stacks uses [semantic commit messages][semantic-commit-style] to automate package releases. No worries, you may not be aware what this is or how it works—just let Buddy guide you.  Stacks automated the commit process for you, simply run `buddy commit` in your terminal and follow the instructions.
 
 For example,
 

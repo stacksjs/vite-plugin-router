@@ -1,8 +1,12 @@
 # vite-plugin-router
 
+<p align="center"><img src=".github/art/cover.jpg" alt="Social Card of this repo"></p>
+
 [![npm version][npm-version-src]][npm-version-href]
 [![GitHub Actions][github-actions-src]][github-actions-href]
-[![codecov][codecov-src]][codecov-href]
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+<!-- [![npm downloads][npm-downloads-src]][npm-downloads-href] -->
+<!-- [![Codecov][codecov-src]][codecov-href] -->
 
 > File based typed routing for Vue Router with TypeScript support ✨
 
@@ -252,5 +256,7 @@ Made with 💙
 [npm-version-href]: https://npmjs.com/package/vite-plugin-router
 [github-actions-src]: https://img.shields.io/github/actions/workflow/status/stacksjs/vite-plugin-router/ci.yml?style=flat-square&branch=main
 [github-actions-href]: https://github.com/stacksjs/vite-plugin-router/actions?query=workflow%3Aci
-[codecov-src]: https://img.shields.io/codecov/c/gh/stacksjs/vite-plugin-router/main?style=flat-square
-[codecov-href]: https://codecov.io/gh/stacksjs/vite-plugin-router
+<!-- [npm-downloads-src]: https://img.shields.io/npm/dm/vite-plugin-router?style=flat-square
+[npm-downloads-href]: https://npmjs.com/package/vite-plugin-router -->
+<!-- [codecov-src]: https://img.shields.io/codecov/c/gh/stacksjs/vite-plugin-router/main?style=flat-square
+[codecov-href]: https://codecov.io/gh/stacksjs/vite-plugin-router -->
