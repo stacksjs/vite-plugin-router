@@ -1,28 +1,34 @@
 # vite-plugin-router
 
-[![NPM version](https://img.shields.io/npm/v/vite-plugin-router?color=black&label=)](https://www.npmjs.com/package/vite-plugin-router) [![ci status](https://github.com/posva/vite-plugin-router/actions/workflows/ci.yml/badge.svg)](https://github.com/posva/vite-plugin-router/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/posva/vite-plugin-router/graph/badge.svg?token=28IvHS7TAx)](https://codecov.io/gh/posva/vite-plugin-router)
+[![npm version][npm-version-src]][npm-version-href]
+[![GitHub Actions][github-actions-src]][github-actions-href]
+[![codecov][codecov-src]][codecov-href]
 
-> Automatic file based Routing in Vue with TS support ✨
+> File based typed routing for Vue Router with TypeScript support ✨
 
-<!-- https://user-images.githubusercontent.com/664177/176622756-3d10acc6-caac-40ff-a41f-9bdccadf7f1d.mp4 -->
+## Features
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/664177/176623167-0153f9fb-79cd-49a7-8575-429ce323dd11.gif" >
-</p>
-
-- [StackBlitz Demo](https://stackblitz.com/github/posva/uvr-demo)
-
-This build-time plugin simplifies your routing setup **and** makes it safer and easier to use thanks to TypeScript. Requires Vue Router >=4.4.0.
-
-> [!WARNING]
-> While vite-plugin-router typed routing and file based routing is fundamentally stable, it contains other experimental APIs that are subject to change (e.g. Data Loaders). Make sure to check the relevant [Documentation](https://uvr.esm.is) for the latest information.
-> If you find any issue, design flaw, or have ideas to improve it, please, open open an [issue](https://github.com/posva/vite-plugin-router/issues/new/choose) or a [Discussion](https://github.com/posva/vite-plugin-router/discussions).
+- 📁 **File Based** _Routes are automatically generated from your files_
+- 🔄 **TypeScript Support** _Full type safety for your routes_
+- 🌐 **Multiple Frameworks** _Works with Vite, Webpack, Rollup, and esbuild_
+- 🎨 **Meta Configuration** _Configure routes via route blocks in your pages_
+- 🔌 **Vue Router Integration** _Seamless integration with Vue Router 4_
+- 📱 **HMR Optimized** _Fast hot module replacement_
+- 🛠️ **Flexible Configuration** _Customize route patterns, exclusions, and more_
 
 ## Install
 
 ```bash
-npm i -D vite-plugin-router
+npm install -D vite-plugin-router
+# or
+yarn add -D vite-plugin-router
+# or
+pnpm add -D vite-plugin-router
+# or
+bun add -D vite-plugin-router
 ```
+
+## Get Started
 
 Add VueRouter plugin **before** Vue plugin:
 
@@ -43,8 +49,6 @@ export default defineConfig({
   ],
 });
 ```
-
-Example: [`playground/`](./playground/)
 
 <br></details>
 
@@ -169,40 +173,84 @@ createRouter({
 })
 ```
 
-Alternatively, **you can also import the `routes` array** and create the router manually or pass it to some plugin. Here is an example with [Vitesse starter](https://github.com/antfu-collective/vitesse/blob/main/src/main.ts):
+## Configuration
 
-```diff
- import { ViteSSG } from 'vite-ssg'
- import { setupLayouts } from 'virtual:generated-layouts'
- import App from './App.vue'
- import type { UserModule } from './types'
--import generatedRoutes from '~pages'
-+import { routes } from 'vue-router/auto-routes'
+```ts
+// vite.config.ts
+import VueRouter from "vite-plugin-router/vite";
 
- import '@unocss/reset/tailwind.css'
- import './styles/main.css'
- import 'uno.css'
-
--const routes = setupLayouts(generatedRoutes)
-
- // https://github.com/antfu/vite-ssg
- export const createApp = ViteSSG(
-   App,
-   {
--   routes,
-+   routes: setupLayouts(routes),
-    base: import.meta.env.BASE_URL
-  },
-   (ctx) => {
-     // install all modules under `modules/`
-     Object.values(import.meta.glob<{ install: UserModule }>('./modules/*.ts', { eager: true }))
-       .forEach(i => i.install?.(ctx))
-   },
- )
+export default defineConfig({
+  plugins: [
+    VueRouter({
+      // Customize your routes
+      routesFolder: ['src/pages'], // default: 'src/pages'
+      exclude: [], // Patterns to exclude from route generation
+      // ... other options
+    }),
+    Vue(),
+  ],
+});
 ```
 
-- [📖 Check more in the Documentation](https://uvr.esm.is).
+### Available Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `routesFolder` | `string \| string[]` | `'src/pages'` | Path(s) to the pages directory. Supports globs. |
+| `exclude` | `string[]` | `[]` | Patterns to exclude from route generation. |
+| `filePatterns` | `string[]` | `['**/*.vue']` | File patterns to include for route generation. |
+
+## Testing
+
+```bash
+bun test
+```
+
+## Changelog
+
+Please see our [releases](https://github.com/stacksjs/vite-plugin-router/releases) page for more information on what has changed recently.
+
+## Contributing
+
+Please review the [Contributing Guide](https://github.com/stacksjs/contributing) for details.
+
+## Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable:
+
+[Discussions on GitHub](https://github.com/stacksjs/stacks/discussions)
+
+For casual chit-chat with others using this package:
+
+[Join the Stacks Discord Server](https://discord.gg/stacksjs)
+
+## Postcardware
+
+"Software that is free, but hopes for a postcard." We love receiving postcards from around the world showing where `vite-plugin-router` is being used! We showcase them on our website too.
+
+Our address: Stacks.js, 12665 Village Ln #2306, Playa Vista, CA 90094, United States 🌎
+
+## Sponsors
+
+We would like to extend our thanks to the following sponsors for funding Stacks development. If you are interested in becoming a sponsor, please reach out to us.
+
+- [JetBrains](https://www.jetbrains.com/)
+- [The Solana Foundation](https://solana.com/)
+
+## Credits
+
+- [All Contributors](https://github.com/stacksjs/vite-plugin-router/contributors)
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+The MIT License (MIT). Please see [LICENSE](https://github.com/stacksjs/stacks/tree/main/LICENSE.md) for more information.
+
+Made with 💙
+
+<!-- Badges -->
+[npm-version-src]: https://img.shields.io/npm/v/vite-plugin-router?style=flat-square
+[npm-version-href]: https://npmjs.com/package/vite-plugin-router
+[github-actions-src]: https://img.shields.io/github/actions/workflow/status/stacksjs/vite-plugin-router/ci.yml?style=flat-square&branch=main
+[github-actions-href]: https://github.com/stacksjs/vite-plugin-router/actions?query=workflow%3Aci
+[codecov-src]: https://img.shields.io/codecov/c/gh/stacksjs/vite-plugin-router/main?style=flat-square
+[codecov-href]: https://codecov.io/gh/stacksjs/vite-plugin-router
