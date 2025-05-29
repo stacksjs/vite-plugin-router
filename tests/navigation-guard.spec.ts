@@ -9,7 +9,7 @@ import type { NavigationFailure } from 'vue-router'
 import type {
   DefineDataLoaderOptions_DefinedData,
   DefineDataLoaderOptions_LaxData,
-} from './defineLoader'
+} from '../src/data-loaders/defineLoader'
 import {
   ABORT_CONTROLLER_KEY,
   DataLoaderPlugin,
@@ -36,7 +36,7 @@ import {
 import { mockPromise } from '../../tests/utils'
 import {
   defineBasicLoader,
-} from './defineLoader'
+} from '../src/data-loaders/defineLoader'
 
 function mockedLoader<T = string | NavigationResult>(
   // boolean is easier to handle for router mock

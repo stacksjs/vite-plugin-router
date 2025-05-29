@@ -11,7 +11,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import type {
   DefineDataLoaderOptions_DefinedData,
   DefineDataLoaderOptions_LaxData,
-} from './defineLoader'
+} from '../src/data-loaders/defineLoader'
 import { enableAutoUnmount, mount } from '@vue/test-utils'
 import {
   DataLoaderPlugin,
@@ -33,10 +33,9 @@ import RouterViewMock from '../../tests/data-loaders/RouterViewMock.vue'
 import { mockPromise } from '../../tests/utils'
 import {
   defineBasicLoader,
-
   INITIAL_DATA_KEY,
   SERVER_INITIAL_DATA_KEY,
-} from './defineLoader'
+} from '../src/data-loaders/defineLoader'
 
 function mockedLoader<T = string | NavigationResult>(
   // boolean is easier to handle for router mock

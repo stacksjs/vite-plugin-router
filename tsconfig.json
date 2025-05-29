@@ -14,7 +14,7 @@
       "vite-plugin-routes/data-loaders": ["./src/data-loaders/entries/index.ts"]
     },
     "resolveJsonModule": true,
-    "types": ["node", "vite/client"],
+    "types": ["bun", "vite/client"],
     "strict": true,
     "strictNullChecks": true,
     "allowUnreachableCode": false,
@@ -37,7 +37,7 @@
     "./src/*.d.ts",
     "./client.d.ts",
     "./tests/**/*.ts,"
-  ],
+, "tests/defineQueryLoader.spec.ts", "tests/defineLoader.test-d.ts", "tests/defineLoader.spec.ts", "tests/defineColadaLoader.test-d.ts", "tests/defineColadaLoader.spec.ts", "tests/meta-extensions.test-d.ts", "tests/navigation-guard.spec.ts", "tests/RoutesFolderWatcher.spec.ts", "tests/generateRouteRecords.spec.ts"  ],
   "exclude": [
     "./src/**/*.test-d.ts",
     // "./src/**/*.spec.ts",

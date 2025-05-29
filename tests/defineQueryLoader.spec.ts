@@ -12,7 +12,7 @@ import {
 import { afterEach, describe } from 'vitest'
 import { shallowRef } from 'vue'
 import { testDefineLoader } from '../../tests/data-loaders'
-import { defineQueryLoader } from './defineQueryLoader'
+import { defineQueryLoader } from '../src/data-loaders/defineQueryLoader'
 
 describe.skip('defineQueryLoader', () => {
   enableAutoUnmount(afterEach)

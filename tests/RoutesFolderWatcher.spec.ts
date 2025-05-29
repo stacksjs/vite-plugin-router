@@ -1,9 +1,9 @@
 import type { FSWatcher } from 'chokidar'
 import type { Mock } from 'vitest'
-import type { RoutesFolderOption } from '../options'
+import type { RoutesFolderOption } from '../src/options'
 import type {
   HandlerContext,
-} from './RoutesFolderWatcher'
+} from '../src/core/RoutesFolderWatcher'
 import fs from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import pathe from 'pathe'
@@ -16,11 +16,11 @@ import {
 
   vi,
 } from 'vitest'
-import { resolveOptions } from '../options'
+import { resolveOptions } from '../src/options'
 import {
   resolveFolderOptions,
   RoutesFolderWatcher,
-} from './RoutesFolderWatcher'
+} from '../src/core/RoutesFolderWatcher'
 
 const FIXTURES_ROOT = pathe.resolve(
   pathe.join(tmpdir(), `vue-router-${Date.now()}`),

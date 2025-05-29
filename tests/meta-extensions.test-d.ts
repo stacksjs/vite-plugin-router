@@ -1,8 +1,8 @@
-import type { UseDataLoader } from './createDataLoader'
+import type { UseDataLoader } from '../src/data-loaders/createDataLoader'
 import { describe, expectTypeOf, it } from 'vitest'
 import { defineComponent } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
-import { defineBasicLoader } from './defineLoader'
+import { defineBasicLoader } from '../src/data-loaders/defineLoader'
 
 describe('meta-extensions', () => {
   it('works when adding routes', () => {

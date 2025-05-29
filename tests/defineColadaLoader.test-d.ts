@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { describe, expectTypeOf, it } from 'vitest'
-import { defineColadaLoader } from './defineColadaLoader'
-import { NavigationResult } from './navigation-guard'
+import { defineColadaLoader } from '../src/data-loaders/defineColadaLoader'
+import { NavigationResult } from '../src/data-loaders/navigation-guard'
 
 describe('defineBasicLoader', () => {
   interface UserData {

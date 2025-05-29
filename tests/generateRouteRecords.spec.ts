@@ -1,10 +1,10 @@
-import type { TreeNode } from '../core/tree'
+import type { TreeNode } from '../src/core/tree'
 import { basename } from 'pathe'
 import { describe, expect, it } from 'vitest'
-import { PrefixTree } from '../core/tree'
-import { ImportsMap } from '../core/utils'
-import { resolveOptions } from '../options'
-import { generateRouteRecord } from './generateRouteRecords'
+import { PrefixTree } from '../src/core/tree'
+import { ImportsMap } from '../src/core/utils'
+import { resolveOptions } from '../src/options'
+import { generateRouteRecord } from '../src/codegen/generateRouteRecords'
 
 const DEFAULT_OPTIONS = resolveOptions({})
 

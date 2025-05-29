@@ -35,7 +35,7 @@ import { defineComponent, nextTick } from 'vue'
 import { getRouter } from 'vue-router-mock'
 import { testDefineLoader } from '../../tests/data-loaders'
 import RouterViewMock from '../../tests/data-loaders/RouterViewMock.vue'
-import { defineColadaLoader } from './defineColadaLoader'
+import { defineColadaLoader } from '../src/data-loaders/defineColadaLoader'
 
 describe(
   'defineColadaLoader',
